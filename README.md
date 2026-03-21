@@ -1,5 +1,8 @@
 # Wizard Duel
 
+> [!WARNING]
+> **This project calls the Anthropic API directly from the browser.** The API key is exposed in the client bundle and readable by anyone with devtools. This architecture is only safe for local personal use. Before any public deployment, API calls must be moved to a server-side proxy (e.g. a Next.js API route, Express endpoint, or edge function) so the key never leaves the server.
+
 A text-based wizard duel game where you cast spells by typing anything you can imagine. Powered by Claude AI as both your opponent (Malachar the ancient wizard) and the narrator who adjudicates what actually happens.
 
 ## Gameplay

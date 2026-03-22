@@ -274,6 +274,35 @@ body {
   animation: dots 1.2s steps(1, end) infinite;
 }
 
+/* Status panel flash animations */
+@keyframes flash-damage {
+  0%, 100% { box-shadow: none; }
+  10%, 30%, 50%, 70% {
+    box-shadow: 0 0 0 3px rgba(220,30,30,0.95), inset 0 0 18px rgba(220,30,30,0.4);
+  }
+  20%, 40%, 60% {
+    box-shadow: 0 0 0 1px rgba(220,30,30,0.3), inset 0 0 4px rgba(220,30,30,0.1);
+  }
+}
+
+@keyframes flash-paradox {
+  0%, 100% { box-shadow: none; }
+  10%, 30%, 50%, 70% {
+    box-shadow: 0 0 0 3px rgba(170,68,220,0.95), inset 0 0 18px rgba(170,68,220,0.4);
+  }
+  20%, 40%, 60% {
+    box-shadow: 0 0 0 1px rgba(170,68,220,0.3), inset 0 0 4px rgba(170,68,220,0.1);
+  }
+}
+
+.flash-damage {
+  animation: flash-damage 750ms ease-out;
+}
+
+.flash-paradox {
+  animation: flash-paradox 750ms ease-out;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--stone-dark); }

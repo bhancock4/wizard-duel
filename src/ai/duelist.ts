@@ -2,10 +2,20 @@ import Anthropic from '@anthropic-ai/sdk'
 import type { GameState, TurnResult } from '../types'
 import { SYSTEM_PROMPT, OPENING_TAUNT_PROMPT, FALLBACK_TAUNT, buildTurnPrompt } from './prompts'
 
+const MODEL = 'claude-haiku-4-5-20251001'
+
 const client = new Anthropic({
   apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
   dangerouslyAllowBrowser: true,
 })
+
+const CACHED_SYSTEM = [
+  {
+    type: 'text' as const,
+    text: SYSTEM_PROMPT,
+    cache_control: { type: 'ephemeral' as const },
+  },
+]
 
 function extractJSON(text: string): string {
   const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/)
@@ -58,9 +68,9 @@ export async function processTurn(
   const prompt = buildTurnPrompt(spell, state, state.log)
 
   const response = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: MODEL,
     max_tokens: 1024,
-    system: SYSTEM_PROMPT,
+    system: CACHED_SYSTEM,
     messages: [{ role: 'user', content: prompt }],
   })
 
@@ -84,7 +94,7 @@ export async function processTurn(
 
 export async function getOpeningTaunt(): Promise<string> {
   const response = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: MODEL,
     max_tokens: 256,
     messages: [{ role: 'user', content: OPENING_TAUNT_PROMPT }],
   })

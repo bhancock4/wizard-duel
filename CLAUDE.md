@@ -51,6 +51,6 @@ User types spell → SpellInput → castSpell() (useGame hook)
 
 ### AI Design
 
-Claude (`claude-opus-4-6`) plays dual roles as **Malachar** (the opponent wizard) and **Narrator/Arbiter**. The system prompt defines both personalities and the adjudication rules (spell damage tiers, paradox effects, how counters reduce damage). Structured outputs guarantee a typed `TurnResult` response every call. The model is never streamed — responses come back in full and display immediately.
+Claude (`claude-haiku-4-5-20251001`) plays dual roles as **Malachar** (the opponent wizard) and **Narrator/Arbiter**. The system prompt defines both personalities and the adjudication rules (spell damage tiers, paradox effects, how counters reduce damage). Structured outputs guarantee a typed `TurnResult` response every call. The model is never streamed — responses come back in full and display immediately.
 
 Malachar's damage/paradox numbers are clamped client-side after the AI call to prevent exploits (e.g., a single spell claiming 999 damage).
